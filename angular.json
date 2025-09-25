@@ -25,7 +25,8 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "D:/vartotojo_sasajos/angular/keep/node_modules/bootstrap/dist/css/bootstrap.css"
             ]
           },
           "configurations": {
@@ -88,5 +89,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "dad119f7-b05a-4be4-852b-6385134481fa"
   }
 }

@@ -1,0 +1,15 @@
+<div class="card">
+    <div class="card-header">
+        Add note
+    </div>
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input [(ngModel)]="title" type="text" name="title" id="title" class="form-control">
+
+            <label for="content" class="form-label">Content</label>
+            <textarea [(ngModel)]="content" name="content" id="content" class="form-control" style="resize:none" rows="5"></textarea>
+        </div>
+        <button class="btn btn-success" (click)="addNote()" [disabled]="title == '' || content == ''">Add</button>
+    </div>
+</div>

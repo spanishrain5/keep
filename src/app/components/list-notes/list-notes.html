@@ -1,0 +1,17 @@
+<div class="card">
+    <div class="card-header">
+        Notes
+    </div>
+    <div class="card-body">
+        <ul *ngIf="notes.length != 0" class="list-group">
+            <li *ngFor="let note of notes; let i=index" class="list-group-item">
+                <h5> {{ note.title }} </h5>
+                <p> {{ note.content }} </p>
+                <button class="btn btn-danger float-end" (click)="deleteNote(i)">Delete</button>
+            </li>
+        </ul>
+        <div class="alert alert-info" *ngIf="notes.length == 0">
+            No notes
+        </div>
+    </div>
+</div>
