@@ -13,10 +13,7 @@ export class ListNotes {
   public notes: Note[] = [];
 
   constructor(private notesService:NotesService) {
-    this.notesService.onNoteListChange.subscribe(() => {
-      this.notes = notesService.notes;
-    });
-    // this.notes = notesService.notes;
+    this.notes = notesService.notes;
   }
 
   public deleteNote(i:number) {
