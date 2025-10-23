@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { NotesService } from '../../services/notes-service';
 import { Note } from '../../models/Note';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-note',
@@ -18,31 +19,20 @@ export class AddNote {
 
   constructor(
     private notesService:NotesService,
-    private http:HttpClient
+    private http:HttpClient,
+    private router:Router
   ) {
     // this.notes = notesService.notes;
   }
 
   public addNote() {
-    // var note: Note = {
-    //   id: ,
-    //   title: this.title,
-    //   content: this.content
-    // };
 
     this.notesService.addNote(this.title, this.content).subscribe(() => {
       this.title = "";
       this.content = "";
       this.notesService.loadNotes();
+      this.router.navigate(['/']);
     });
-    // this.notes.push(note);
-
-    // this.title = "";
-    // this.content = "";
-
-    // this.http.post(
-    //   "https://notes-ccfbf-default-rtdb.europe-west1.firebasedatabase.app/notes.json", 
-    //   note
-    // ).subscribe(() => {});
+  
   }
 }

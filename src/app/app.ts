@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { AddNote } from "./components/add-note/add-note";
 import { ListNotes } from "./components/list-notes/list-notes";
 import { CountNotes } from "./components/count-notes/count-notes";
+import { Navbar } from './components/navbar/navbar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AddNote, ListNotes, CountNotes],
+  imports: [RouterOutlet, AddNote, ListNotes, CountNotes, Navbar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

@@ -11,37 +11,23 @@ export class NotesService {
   public onNoteListChange = new EventEmitter;
 
   constructor(private http:HttpClient){
-    // let tmp = localStorage.getItem("notes");
-
-    // if (tmp != null){
-    //   this.notes = JSON.parse(tmp);
-    // }
     this.loadNotes();
   }
 
   public loadNotes() {
-    this.http.get<{[key:string]:Note}>(
+    return this.http.get<{[key:string]:Note}>(
       "https://notes-ccfbf-default-rtdb.europe-west1.firebasedatabase.app/notes.json"
-    ).subscribe((data) => {
-      this.notes=[];
-      for (let n in data){
-        this.notes.push({
-          id: n,
-          title: data[n].title,
-          content: data[n].content
-        });
-      }
-      this.onNoteListChange.emit();
-    })
+    )
   }
 
-  private saveList() {
-    localStorage.setItem("notes", JSON.stringify(this.notes));
+  public loadNote(id:String) {
+    return this.http.get<Note>(
+      "https://notes-ccfbf-default-rtdb.europe-west1.firebasedatabase.app/notes/"
+      +id+".json"
+    );
   }
 
   public addNote(title:String, content:String) {
-    // this.notes.push({title: title});
-    // this.saveList;
     return this.http.post(
       "https://notes-ccfbf-default-rtdb.europe-west1.firebasedatabase.app/notes.json", 
       {
@@ -51,20 +37,22 @@ export class NotesService {
     ) 
   }
 
-  public deleteNote(i:number) {
-    // this.notes.splice(i, 1);
-    // this.saveList();
-    // this.onNoteListChange.emit();
-    console.log("https://notes-ccfbf-default-rtdb.europe-west1.firebasedatabase.app/notes/"+this.notes[i].id+".json");
-    this.http.delete(
-      "https://notes-ccfbf-default-rtdb.europe-west1.firebasedatabase.app/notes/"+this.notes[i].id+".json" 
-    ).subscribe(() => {
-      this.loadNotes();
-    });
+  public updateNote(note:Note) {
+    return this.http.patch(
+      "https://notes-ccfbf-default-rtdb.europe-west1.firebasedatabase.app/notes/"
+      +note.id+".json",
+      note
+    )
   }
 
-  // studentsService.onNoteListChange.subscribe(() => {
-  //   this.totalNotes = this.students.length;
-  // })
+  public deleteNote(id:String) {
+    return this.http.delete(
+      "https://notes-ccfbf-default-rtdb.europe-west1.firebasedatabase.app/notes/"+id+".json" 
+    );
+  }
+
+  public emitChange() {
+    this.onNoteListChange.emit();
+  }
    
 }

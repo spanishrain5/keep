@@ -7,7 +7,9 @@
             <li *ngFor="let note of notes; let i=index" class="list-group-item">
                 <h5> {{ note.title }} </h5>
                 <p> {{ note.content }} </p>
-                <button class="btn btn-danger float-end" (click)="deleteNote(i)">Delete</button>
+                
+                <button class="btn btn-danger float-end" (click)="deleteNote(note.id)">Delete</button>
+                <a class="btn btn-success float-end me-2" [routerLink]="['edit', note.id]">Edit</a>
             </li>
         </ul>
         <div class="alert alert-info" *ngIf="notes.length == 0">
